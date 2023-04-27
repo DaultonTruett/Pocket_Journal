@@ -1,0 +1,22 @@
+{% extends "web_journals/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+    <h1> {{ topic }} </h1>
+{% endblock page_header %}
+
+{% block content %}
+
+    <p>Add new entry</p>
+    <form action="{% url 'web_journals:new_entry' topic.id %}" method="post"> 
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        {% buttons %}
+            <button name="submit" class="btn btn-primary"> Add entry </button>
+            <a href="{% url 'web_journals:topic' topic.id %}" class="btn btn-primary ml-3"> Cancel </a>
+        {% endbuttons %}
+
+    </form>
+
+{% endblock content %}

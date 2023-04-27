@@ -1,0 +1,1 @@
+web: gunicorn web_journals.wsgi --log-file -

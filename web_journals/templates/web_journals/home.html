@@ -1,0 +1,22 @@
+{% extends "web_journals/base.html" %}
+
+
+{% block content %}
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+    
+        {% if user.is_authenticated %}
+        <h1 class="display-4"> Hello, {{ user.username }} </h1>
+            {% if topics|length == 1 %}
+                <h2 class="mt-4">You have {{topics|length}} topic in your journal. </h2>
+            {% else %}
+            <h2 class="mt-4">You have {{topics|length}} topics in your journal. </h2>
+            {% endif %}
+            <a class="btn btn-lg btn-primary mt-4" href="{% url 'web_journals:topics' %}" 
+            role="button"> Go to my topics </a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

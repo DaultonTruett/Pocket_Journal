@@ -1,0 +1,17 @@
+{% extends "web_journals/base.html" %}
+
+{% block content %}
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+        <h1 class="display-4"> Journal as you learn </h1>
+        <p class="lead"> Create your own personal web journal. Add new topics, make new entries, 
+            and track your learning journey online! </p>
+            <p>Register below to start, it's free and always will be.</p>
+            
+            <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" 
+                role="button"> Register &raquo;</a>
+    </div>
+</div>
+
+{% endblock content %}

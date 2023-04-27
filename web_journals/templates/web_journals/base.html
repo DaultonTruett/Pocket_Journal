@@ -1,0 +1,75 @@
+{% load bootstrap4 %}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Pocket Journal </title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+</head>
+<body class="bg-white text-dark">
+    <nav class="navbar shadow p-2 sticky-top navbar-expand-lg navbar-dark bg-dark mb-4 border text-white">
+        <a class="navbar-brand text-success"> Pocket Journal </a>
+           
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" 
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link ml-3 text-white" href="{% url 'web_journals:home' %}"> Home </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link ml-3 text-white" href="{% url 'web_journals:index' %}"> Home </a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link ml-3 text-white" href="{% url 'web_journals:topics' %}">
+                        Topics</a>
+                </li>
+                
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item mr-auto">
+                    <span class="nav-link ml-3 text-white"> | {{ user.username }} | </span>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link ml-3 text-white" href="{% url 'users:logout' %}"> Log out </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link ml-3 text-white" href="{% url 'users:register' %}"> Register </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ml-3 text-white" href="{% url 'users:login' %}"> Log in 
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="container" >
+        <div class="pb-2 mb-2 border-bottom border-dark">
+            {% block page_header %} {% endblock page_header %}
+        </div>
+        <div >
+            {% block content %} {% endblock content %}
+        </div>
+    </main>
+
+</body>
+
+</html>
+

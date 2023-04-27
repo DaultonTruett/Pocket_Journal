@@ -1,0 +1,14 @@
+{% extends "web_journals/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+<div class="jumbotron">
+    <h2 class='display-4'> You have been logged out. </h2>
+</div>
+{% endblock page_header %}
+
+{% block content %}
+
+<h2> <a href="{% url 'web_journals:index' %}" class="btn btn-primary btn-lg"> Home </a></h2>
+
+{% endblock content %}

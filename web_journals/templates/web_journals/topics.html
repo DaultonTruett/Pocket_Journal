@@ -1,0 +1,36 @@
+{% extends "web_journals/base.html" %}
+
+{% block page_header %}
+    <h1> Topics </h1>
+{% endblock page_header %}
+
+{% block content %}
+    <h3 class="mb-4 mt-4">
+        <a href="{% url 'web_journals:new_topic' %}"> Add a new topic </a>
+    </h3>
+
+    {% for topic in topics %}
+        <table class="w-100 table table-hover table-secondary shadow">
+        <thead>
+          <tr class="bg-secndary text-dark">
+            <th class="w-25" scope="col">Entry </th>
+            <th class="w-25" scope="col">Topic</th>
+            <th class="w-25" scope="col">Date added</th>
+            <th class="w-25" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td> {{ topic }} </td>
+            <td> {{ topic.date_added|date:"M d, Y H:i" }} </td>
+            <td class="ml-auto"><a class="btn btn-primary " href="{% url 'web_journals:topic' topic.id %}"> View Topic </a></td>
+          </tr>
+          </tbody>
+        </table>
+        
+
+    {% empty %}
+        <h3>No topics have been added yet</h3>
+    {% endfor %}
+{% endblock content %}

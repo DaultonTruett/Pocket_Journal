@@ -1,0 +1,95 @@
+{% extends "web_journals/base.html" %}
+
+
+{% block page_header %}
+    <h1 > {{ topic }}
+       <small><a href="{% url 'web_journals:edit_topic' topic.id %}"
+       class="btn btn-primary btn-sm ml-3"> Edit topic </a>
+    </small>
+
+    <!--Trigger the modal-->
+    <small
+        class="btn btn-outline-danger btn-sm ml-3" data-toggle="modal" data-target="#delete_topic"> Delete topic </a> 
+    </small>
+
+    <!--Modal-->
+    <div class="modal fade" id="delete_topic" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5>Are you sure you want to delete "{{ topic }}" from your journal? </h5>
+            </div>
+            <div class="modal-footer">
+              <small>
+                <a class="btn btn-primary" href="{% url 'web_journals:topic' topic.id %}">Cancel</a>
+              </small> 
+              <small>
+                <a class="btn btn-outline-danger" href="{% url 'web_journals:delete_topic' topic.id %}">Delete</a>
+              </small> 
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </h1>
+{% endblock page_header %}
+
+{% block content %}
+    <h3> 
+        <a href="{% url 'web_journals:new_entry' topic.id %}"> Add a new entry </a> 
+    </h3>
+
+        {% for entry in entries %}
+
+            <div class="card mb-3 shadow w-75 bg-light text-dark">
+                <h4 class="card-header ">
+                    {{ entry.date_added|date:"M d, Y H:i" }}
+                    <small><a href="{% url 'web_journals:edit_entry' entry.id %}" 
+                        class="btn btn-primary btn-sm ml-3"> Edit entry </a>
+                    </small>
+
+                    <!--Trigger the modal-->
+                    <small
+                        class="btn btn-outline-danger btn-sm ml-3" data-toggle="modal" data-target="#delete_entry"> Delete entry </a> 
+                    </small>
+                <!--Modal-->
+                <div class="modal fade" id="delete_entry" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <h5>Are you sure you want to delete this entry from your journal? </h5>
+                        </div>
+                        <div class="modal-footer">
+                        <small>
+                            <a class="btn btn-primary" href="{% url 'web_journals:topic' topic.id %}">Cancel</a>
+                        </small> 
+                        <small>
+                            <a class="btn btn-outline-danger" href="{% url 'web_journals:delete_entry' entry.id %}">Delete</a>
+                        </small> 
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </h4>
+                <div class="card-body">
+                    {{ entry.text|linebreaks }}
+                </div>
+            </div>
+            
+        {% empty %}
+            <p> There are no entries for this topic yet. </p>
+        {% endfor %}
+
+{% endblock content %}

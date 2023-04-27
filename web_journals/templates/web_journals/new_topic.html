@@ -1,0 +1,22 @@
+{% extends "web_journals/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <h4> Add a new topic: </h4>
+
+    <form action="{% url 'web_journals:new_topic' %}" method="post">
+        <!--This template tag prevents cross-site request forgery-->
+        {% csrf_token %}
+        <!--Display the form data as a paragraph-->
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button name="submit" class="btn btn-primary"> Add topic </button>
+            <a href="{% url 'web_journals:topics' %}" class="btn btn-primary ml-3"> Cancel </a>
+        {% endbuttons %}
+
+    </form>
+
+{% endblock content %}
+

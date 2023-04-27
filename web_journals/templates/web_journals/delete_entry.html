@@ -1,0 +1,13 @@
+{% extends "web_journals/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="alert alert-success" role="alert">
+    <h2 class="alert-heading"> Success! </h2>
+    <p>You have deleted an entry from your {{ topic }} journal. </p>
+    <hr>
+    <a href="{% url 'web_journals:topic' topic.id %}" class="btn btn-primary btn-md"> Return to: {{ topic }} </a></h3>
+  </div>
+
+{% endblock content %}
