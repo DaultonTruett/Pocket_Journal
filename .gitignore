@@ -1,3 +1,4 @@
 wj_env
 __pycache__
 *.sqlite3
+web_journal/settings.py
